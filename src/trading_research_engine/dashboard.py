@@ -18,7 +18,8 @@ def main() -> None:
         "Simulation only. This dashboard has no broker connection and cannot "
         "submit live orders."
     )
-    root = Path(st.sidebar.text_input("Forward session folder", r"runs\forward_tests"))
+    default_root = str(Path("runs") / "forward_tests")
+    root = Path(st.sidebar.text_input("Forward session folder", default_root))
     if st.sidebar.button("Refresh"):
         st.rerun()
 
@@ -53,7 +54,7 @@ def main() -> None:
             }
         )
     st.subheader("Active strategies")
-    st.dataframe(pd.DataFrame(active_rows), use_container_width=True, hide_index=True)
+    st.dataframe(pd.DataFrame(active_rows), width="stretch", hide_index=True)
 
     selected_name = st.selectbox(
         "Session details",
@@ -98,14 +99,14 @@ def main() -> None:
                 y="equity",
                 title="Equity (realized plus marked-to-market open position)",
             )
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
             drawdown_figure = px.area(
                 equity,
                 x="timestamp",
                 y="drawdown_dollars",
                 title="Drawdown in dollars",
             )
-            st.plotly_chart(drawdown_figure, use_container_width=True)
+            st.plotly_chart(drawdown_figure, width="stretch")
 
     events_path = directory / "forward_events.jsonl"
     if events_path.is_file() and events_path.stat().st_size:
@@ -115,7 +116,7 @@ def main() -> None:
         selected_type = st.selectbox("Event type", filters)
         if selected_type != "all":
             events = events.loc[events["event_type"] == selected_type]
-        st.dataframe(events.iloc[::-1], use_container_width=True, hide_index=True)
+        st.dataframe(events.iloc[::-1], width="stretch", hide_index=True)
 
     for filename, title in (
         ("forward_orders.csv", "Simulated orders"),
@@ -125,7 +126,7 @@ def main() -> None:
         if table_path.is_file() and table_path.stat().st_size:
             table = pd.read_csv(table_path)
             with st.expander(title):
-                st.dataframe(table, use_container_width=True, hide_index=True)
+                st.dataframe(table, width="stretch", hide_index=True)
 
 
 def _format_currency(value: object) -> str:

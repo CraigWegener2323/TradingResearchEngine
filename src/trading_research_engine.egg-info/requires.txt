@@ -1,9 +1,0 @@
-numpy<3.0,>=2.0
-pandas<4.0,>=2.2
-
-[dashboard]
-streamlit<2.0,>=1.40
-plotly<7.0,>=5.24
-
-[parquet]
-pyarrow<25.0,>=17.0

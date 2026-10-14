@@ -60,6 +60,21 @@ py -3.14 -m venv .venv-dashboard
 The dashboard opens even before any forward sessions exist. To display a
 session, point the dashboard sidebar to the forward-test output directory.
 
+### Deploy from GitHub to Streamlit Community Cloud
+
+The root-level [streamlit_app.py](./streamlit_app.py) is the Community Cloud
+entry point. Push this repository to GitHub, then in Streamlit Community Cloud
+create an app from that repository and select `streamlit_app.py` as the main
+file. The root [requirements.txt](./requirements.txt) installs the app and its
+dashboard dependencies. Use a Python version supported by Streamlit Cloud and
+compatible with the listed dependencies.
+
+Community Cloud runs on its own Linux machine; it cannot see your PC's files.
+The local `runs/` folder is intentionally ignored by Git, so a deployed app
+will show the empty-session message unless forward session artifacts are made
+available to the deployment. The app does not connect to a feed or persist
+forward-test sessions to external storage.
+
 ## Strategy experimentation
 
 The experiment runner compares independent strategies using the same
@@ -355,4 +370,3 @@ implemented, so only synthetic tests can be run until you supply your data.
 PyArrow is optional and the Parquet round-trip test is skipped when its engine
 is not installed; this environment's Python 3.15 did not have a compatible
 PyArrow wheel, so Parquet could not be exercised here.
-# TradingResearchEngine

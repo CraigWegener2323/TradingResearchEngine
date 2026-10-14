@@ -1,2 +1,4 @@
 -e .
 pytest>=8.0,<10.0
+streamlit>=1.57,<2.0
+plotly>=5.24,<7.0
