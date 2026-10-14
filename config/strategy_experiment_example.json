@@ -1,0 +1,127 @@
+{
+  "periods": {
+    "development_start": "2022-01-01T00:00:00Z",
+    "development_end": "2024-01-01T00:00:00Z",
+    "validation_start": "2024-01-01T00:00:00Z",
+    "validation_end": "2025-01-01T00:00:00Z",
+    "out_of_sample_start": "2025-01-01T00:00:00Z",
+    "out_of_sample_end": "2026-10-01T00:00:00Z"
+  },
+  "validation_top_n": 8,
+  "criteria": {
+    "minimum_validation_trades": 100,
+    "minimum_oos_trades": 30,
+    "minimum_expectancy_ci_lower": 0.0,
+    "minimum_profit_factor": 1.1,
+    "maximum_drawdown_percent": 20.0,
+    "minimum_positive_period_fraction": 0.6,
+    "confidence_level": 0.95,
+    "bootstrap_resamples": 2000,
+    "random_seed": 1729
+  },
+  "grids": [
+    {
+      "strategy_family": "multi_timeframe_trend_pullback",
+      "strategy_grid": {
+        "fast_period": [14],
+        "slow_period": [50],
+        "higher_timeframe": ["15min", "1h"],
+        "higher_timeframe_ema": [50]
+      },
+      "execution_grid": {
+        "instrument": ["NQ", "MNQ"],
+        "stop_mode": ["fixed", "atr", "structure"],
+        "stop_loss_points": [20.0],
+        "stop_atr_period": [14],
+        "stop_atr_multiple": [2.0],
+        "structure_lookback": [20],
+        "take_profit_mode": ["fixed", "risk_reward", "none"],
+        "take_profit_points": [40.0],
+        "risk_reward_multiple": [2.0],
+        "commission_per_contract": [2.5],
+        "slippage_ticks": [1.0],
+        "tick_size": [0.25],
+        "risk_fraction": [0.01],
+        "max_position_size": [10]
+      }
+    },
+    {
+      "strategy_family": "fvg_order_block_pullback",
+      "strategy_grid": {
+        "atr_period": [14],
+        "order_block_lookback": [12],
+        "displacement_atr": [1.0],
+        "minimum_gap_atr": [0.1]
+      },
+      "execution_grid": {
+        "instrument": ["NQ", "MNQ"],
+        "stop_mode": ["fixed", "atr", "structure"],
+        "stop_loss_points": [20.0],
+        "stop_atr_period": [14],
+        "stop_atr_multiple": [2.0],
+        "structure_lookback": [20],
+        "take_profit_mode": ["fixed", "risk_reward", "none"],
+        "take_profit_points": [40.0],
+        "risk_reward_multiple": [2.0],
+        "commission_per_contract": [2.5],
+        "slippage_ticks": [1.0],
+        "tick_size": [0.25],
+        "risk_fraction": [0.01],
+        "max_position_size": [10]
+      }
+    },
+    {
+      "strategy_family": "range_mean_reversion_failed_breakout",
+      "strategy_grid": {
+        "lookback": [30],
+        "atr_period": [14],
+        "maximum_range_atr": [4.0, 6.0],
+        "edge_atr": [0.5]
+      },
+      "execution_grid": {
+        "instrument": ["NQ", "MNQ"],
+        "stop_mode": ["fixed", "atr", "structure"],
+        "stop_loss_points": [20.0],
+        "stop_atr_period": [14],
+        "stop_atr_multiple": [2.0],
+        "structure_lookback": [20],
+        "take_profit_mode": ["fixed", "risk_reward", "none"],
+        "take_profit_points": [40.0],
+        "risk_reward_multiple": [2.0],
+        "commission_per_contract": [2.5],
+        "slippage_ticks": [1.0],
+        "tick_size": [0.25],
+        "risk_fraction": [0.01],
+        "max_position_size": [10]
+      }
+    },
+    {
+      "strategy_family": "volatility_regime",
+      "strategy_grid": {
+        "atr_period": [14],
+        "regime_lookback": [250],
+        "lower_percentile": [0.25],
+        "upper_percentile": [0.75],
+        "range_lookback": [30],
+        "trend_fast": [14],
+        "trend_slow": [50]
+      },
+      "execution_grid": {
+        "instrument": ["NQ", "MNQ"],
+        "stop_mode": ["fixed", "atr", "structure"],
+        "stop_loss_points": [20.0],
+        "stop_atr_period": [14],
+        "stop_atr_multiple": [2.0],
+        "structure_lookback": [20],
+        "take_profit_mode": ["fixed", "risk_reward", "none"],
+        "take_profit_points": [40.0],
+        "risk_reward_multiple": [2.0],
+        "commission_per_contract": [2.5],
+        "slippage_ticks": [1.0],
+        "tick_size": [0.25],
+        "risk_fraction": [0.01],
+        "max_position_size": [10]
+      }
+    }
+  ]
+}
